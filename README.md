@@ -22,7 +22,7 @@ One of the challenges I faced was figuring out a bug caused by not using MySQL l
 
 Another challenge I faced was figuring out how to include different models within routes, which took loads of research.
 
-I can feel myself getting better at reading code, and I continue to work on tieing everything together.
+I can feel myself getting better at reading code, and I continue to work on tying everything together.
 
 ## Installation
 
