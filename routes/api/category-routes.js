@@ -6,7 +6,10 @@ const { Category, Product } = require('../../models');
   // find all categories
 router.get('/', (req, res) => {
   Category.findAll().then((categoryData) => {
-    res.json(categoryData);
+    res.status(200).json(categoryData);
+  })
+    .catch((err) => {
+      res.status(500).json(err);
   });
 });
 
@@ -25,8 +28,8 @@ router.get('/:id', (req, res) => {
   });
 });
 
+    // create a new category
 router.post('/', (req, res) => {
-  // create a new category
   Category.create(req.body)
     .then((newCategory) => {
       res.json(newCategory);
@@ -36,8 +39,8 @@ router.post('/', (req, res) => {
     });
 });
 
+    // update a category by its `id` value
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
   Category.update(
     {
       category_name: req.body.category_name
@@ -54,8 +57,8 @@ router.put('/:id', (req, res) => {
     .catch((err) => res.json(err));
 });
 
+    // delete a category by its `id` value
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
   Category.destroy({
     where: {
       id: req.params.id,
