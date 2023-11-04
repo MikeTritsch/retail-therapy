@@ -16,18 +16,24 @@ router.get('/', (req, res) => {
 // get one product
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-router.get('/:id', (req, res) => {
-  Product.findByPk(req.params.id, [{include: Category, as: 'category'}, Tag]).then((productData) => {
-    if (!productData) {
-      res.status(404).json({message: 'Product not found!'});
-      return;
-    }
-    res.json(productData);
-  })
-  .catch((err) => {
-    res.status(500).json(err);
+  router.get('/:id', (req, res) => {
+    Product.findByPk(req.params.id, {
+      include: [
+        { model: Category, as: 'category' },
+        Tag, // Include associated Tag data
+      ],
+    })
+      .then((productData) => {
+        if (!productData) {
+          res.status(404).json({ message: 'Product not found' });
+          return;
+        }
+        res.status(200).json(productData);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
   });
-});
 
 // create new product
   /* req.body should look like this...
