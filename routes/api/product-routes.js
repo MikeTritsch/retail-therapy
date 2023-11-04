@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
   router.get('/:id', (req, res) => {
     Product.findByPk(req.params.id, {
       include: [
-        { model: Category, as: 'category' },
-        Tag, // Include associated Tag data
+        { model: Category, as: 'category'},
+        Tag,
       ],
     })
       .then((productData) => {
@@ -45,18 +45,6 @@ router.get('/', (req, res) => {
     }
   */
 router.post('/', (req, res) => {
-  Product.create([
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  ])
-  .catch((err) => {
-    res.json(err);
-  });
-
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
